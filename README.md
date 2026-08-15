@@ -3,6 +3,20 @@
 מערכת חכמה להתאמת מסגרות משקפיים באמצעות ניתוח פנים.
 פרויקט גמר, מכללת אשקלון.
 
+## התקנה והרצה מהירה (מהאפס)
+
+לאחר הורדת הפרויקט (clone / הורדת ZIP), מתיקיית השורש:
+
+```bash
+python -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+bash download_model.sh
+.venv\Scripts\python server.py
+```
+
+ואז פותחים בדפדפן **http://localhost:8000**.
+פירוט מלא של שתי דרכי ההרצה נמצא בהמשך, תחת "שתי דרכי הרצה".
+
 ## מבנה הפרויקט
 
 ```
@@ -42,7 +56,7 @@ OPTI_FIT PROJECT/
 ├── tests/                         # בדיקות יחידה (unittest, ללא תלות חיצונית)
 │   ├── test_face_shape_classifier.py
 │   └── test_recommendation_engine.py
-└── _backups/                      # גיבויים (גרסאות app.py קודמות, מנוע v1, old_frames)
+└── .gitignore                     # החרגת סביבת עבודה, גיבויים ותמונות אישיות
 ```
 
 ## בדיקות (Unit Tests)
