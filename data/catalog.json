@@ -1,0 +1,11 @@
+[
+  {"id": "F001", "name": "Aviator Gold Classic", "shape_tag": "אביאטור", "metal": "זהב", "color": "זהב שקוף", "image": "aviator_gold.png"},
+  {"id": "F002", "name": "Square Bold Black", "shape_tag": "מרובעות", "metal": "אצטט", "color": "שחור עמוק", "image": "square_black.png"},
+  {"id": "F003", "name": "Round Vintage Tortoise", "shape_tag": "עגולות", "metal": "אצטט", "color": "טורטוישל קלאסי", "image": "round_tortoise.png"},
+  {"id": "F004", "name": "Cat-Eye Elegance", "shape_tag": "Cat-Eye", "metal": "זהב", "color": "זהב עתיק", "image": "cateye_gold.png"},
+  {"id": "F005", "name": "Oval Minimal Silver", "shape_tag": "אובליות", "metal": "כסף", "color": "כסף מבריק", "image": "oval_silver.png"},
+  {"id": "F006", "name": "Rectangle Modern Frame", "shape_tag": "מלבניות", "metal": "טיטניום", "color": "אפור עשן", "image": "rectangle_black.png"},
+  {"id": "F007", "name": "Geometric Hex Edge", "shape_tag": "גיאומטריות", "metal": "טיטניום", "color": "כחול חצות", "image": "geo_hex.png"},
+  {"id": "F008", "name": "Classic Wayfarer", "shape_tag": "Wayfarer", "metal": "אצטט", "color": "חום קוניאק", "image": "wayfarer_black.png"},
+  {"id": "F009", "name": "Slim Rimless Bottom", "shape_tag": "תחתית קלה (Rimless בתחתית)", "metal": "טיטניום", "color": "כסף קר", "image": "rimless_bottom.png"}
+]

@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Backups
+_backups/
+
+# Personal / live / temporary images (NOT for upload)
+data/_*.jpg
+data/_*.jpeg
+data/_*.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Secrets
+.streamlit/secrets.toml
+*.env
+.env

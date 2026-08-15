@@ -1,0 +1,390 @@
+{
+  "schema_version": "0.1",
+  "project": "OptiFit AI",
+  "purpose": "Starter rule dataset for eyewear recommendation; prototype rules that should be validated and tuned.",
+  "principles": {
+    "face_shape": "Use face shape only as a style signal, not as a judgment of attractiveness.",
+    "material": "Do not infer material from face shape alone. Base it mainly on weight, durability, comfort, lens needs and style preference.",
+    "color": "Color recommendations are subjective and lighting-sensitive. Prefer user-selected undertone/contrast or neutral-light analysis with confidence.",
+    "size": "Do not claim exact glasses size from an uncalibrated face photo. Prefer a known comfortable frame size, manufacturer front width, or calibrated measurement.",
+    "fit_priority": "Check physical fit before style scoring."
+  },
+  "face_shape_classes": [
+    "oval",
+    "round",
+    "square",
+    "heart",
+    "oblong",
+    "diamond"
+  ],
+  "frame_shape_classes": [
+    "panto",
+    "round",
+    "oval",
+    "soft_square",
+    "rectangle",
+    "cat_eye",
+    "browline",
+    "aviator"
+  ],
+  "face_shape_frame_scores_1_to_5": {
+    "oval": {
+      "panto": 5,
+      "round": 4,
+      "oval": 4,
+      "soft_square": 5,
+      "rectangle": 4,
+      "cat_eye": 4,
+      "browline": 4,
+      "aviator": 4
+    },
+    "round": {
+      "panto": 3,
+      "round": 2,
+      "oval": 2,
+      "soft_square": 5,
+      "rectangle": 5,
+      "cat_eye": 4,
+      "browline": 4,
+      "aviator": 3
+    },
+    "square": {
+      "panto": 5,
+      "round": 5,
+      "oval": 5,
+      "soft_square": 3,
+      "rectangle": 2,
+      "cat_eye": 4,
+      "browline": 3,
+      "aviator": 4
+    },
+    "heart": {
+      "panto": 5,
+      "round": 4,
+      "oval": 5,
+      "soft_square": 4,
+      "rectangle": 3,
+      "cat_eye": 4,
+      "browline": 3,
+      "aviator": 4
+    },
+    "oblong": {
+      "panto": 5,
+      "round": 5,
+      "oval": 4,
+      "soft_square": 4,
+      "rectangle": 3,
+      "cat_eye": 4,
+      "browline": 4,
+      "aviator": 5
+    },
+    "diamond": {
+      "panto": 5,
+      "round": 4,
+      "oval": 5,
+      "soft_square": 4,
+      "rectangle": 3,
+      "cat_eye": 4,
+      "browline": 4,
+      "aviator": 4
+    }
+  },
+  "rim_thickness_preferences_by_face_shape": {
+    "oval": [
+      "thin",
+      "medium",
+      "thick"
+    ],
+    "round": [
+      "medium",
+      "thick"
+    ],
+    "square": [
+      "thin",
+      "medium"
+    ],
+    "heart": [
+      "thin",
+      "medium"
+    ],
+    "oblong": [
+      "medium",
+      "thick"
+    ],
+    "diamond": [
+      "thin",
+      "medium"
+    ]
+  },
+  "material_rules": {
+    "acetate": {
+      "strengths": [
+        "many colors",
+        "works well for medium or thick rims",
+        "classic or bold styling"
+      ],
+      "preference_tags": [
+        "bold_style",
+        "color_variety",
+        "classic_acetate"
+      ]
+    },
+    "metal": {
+      "strengths": [
+        "visually light",
+        "works well for thin rims",
+        "minimal styling"
+      ],
+      "preference_tags": [
+        "minimal",
+        "thin_rim",
+        "light_visual_weight"
+      ]
+    },
+    "titanium": {
+      "strengths": [
+        "lightweight",
+        "durable",
+        "corrosion resistant"
+      ],
+      "preference_tags": [
+        "lightweight",
+        "durability",
+        "minimal"
+      ],
+      "note": "Exact allergy suitability depends on alloy/coating; do not make a medical claim."
+    },
+    "combination": {
+      "strengths": [
+        "mixes acetate and metal styling",
+        "balanced visual weight"
+      ],
+      "preference_tags": [
+        "mixed_style",
+        "versatile"
+      ]
+    }
+  },
+  "color_rules": {
+    "undertone": {
+      "warm": [
+        "honey",
+        "warm_tortoise",
+        "camel",
+        "olive",
+        "warm_brown",
+        "gold",
+        "bronze",
+        "warm_clear"
+      ],
+      "cool": [
+        "black",
+        "charcoal",
+        "navy",
+        "cool_gray",
+        "burgundy",
+        "silver",
+        "gunmetal",
+        "cool_clear"
+      ],
+      "neutral": [
+        "black",
+        "tortoise",
+        "clear",
+        "brown",
+        "gray",
+        "navy",
+        "gold",
+        "silver"
+      ]
+    },
+    "contrast": {
+      "low": [
+        "clear",
+        "translucent",
+        "soft_tortoise",
+        "light_neutral"
+      ],
+      "medium": [
+        "mid_tortoise",
+        "brown",
+        "gray",
+        "navy",
+        "muted_color"
+      ],
+      "high": [
+        "black",
+        "dark_tortoise",
+        "deep_navy",
+        "burgundy",
+        "high_contrast_color"
+      ]
+    },
+    "confidence_note": "If image lighting is mixed or strongly colored, return low confidence and ask for manual palette selection."
+  },
+  "size_rules": {
+    "preferred_inputs_in_order": [
+      "known_comfortable_frame_dimensions",
+      "manufacturer_frame_front_width_mm",
+      "calibrated_face_width_mm",
+      "uncalibrated_photo_only"
+    ],
+    "known_frame_dimensions_format": "lens_width-mm / bridge_width-mm / temple_length-mm, e.g. 49/21/145",
+    "matching_from_known_comfortable_pair": {
+      "lens_width_tolerance_mm": 2,
+      "bridge_width_tolerance_mm": 2,
+      "temple_length_tolerance_mm": 5,
+      "note": "Starter heuristic only; frame geometry can make two identical printed sizes fit differently."
+    },
+    "front_width_match": {
+      "excellent_if_abs_difference_mm_lte": 3,
+      "good_if_abs_difference_mm_lte": 6,
+      "possible_if_abs_difference_mm_lte": 10
+    },
+    "if_only_uncalibrated_photo": {
+      "exact_mm_size": null,
+      "allowed_output": [
+        "relative_width_small_medium_large",
+        "style_recommendations"
+      ],
+      "size_confidence": "low"
+    }
+  },
+  "face_shape_feature_heuristics": {
+    "status": "starter_heuristics_needs_validation",
+    "features": [
+      "face_length_to_cheek_width_ratio",
+      "jaw_width_to_cheek_width_ratio",
+      "forehead_width_to_cheek_width_ratio",
+      "jaw_taper",
+      "jaw_angle_softness"
+    ],
+    "rules": {
+      "round": "lower length/width ratio + similar cheek/jaw widths + softer jaw",
+      "oval": "moderate length/width ratio + gradual taper toward jaw",
+      "square": "moderate length/width ratio + relatively broad jaw + more angular jaw",
+      "heart": "forehead wider than jaw + noticeable taper toward chin",
+      "oblong": "higher length/width ratio",
+      "diamond": "cheek width greater than both forehead and jaw widths"
+    }
+  },
+  "universal_defaults": [
+    {
+      "id": "classic_panto_medium",
+      "shape": "panto",
+      "rim_thickness": "medium",
+      "preferred_materials": [
+        "acetate",
+        "combination"
+      ],
+      "color_families": [
+        "tortoise",
+        "black",
+        "clear",
+        "brown"
+      ],
+      "universal_score": 0.92,
+      "style_note": "Classic rounded/panto profile; useful as a neutral default when face-shape confidence is low."
+    },
+    {
+      "id": "soft_square_medium",
+      "shape": "soft_square",
+      "rim_thickness": "medium",
+      "preferred_materials": [
+        "acetate",
+        "metal",
+        "combination"
+      ],
+      "color_families": [
+        "black",
+        "tortoise",
+        "clear",
+        "navy",
+        "gray"
+      ],
+      "universal_score": 0.89,
+      "style_note": "Balanced square shape with softened corners."
+    },
+    {
+      "id": "thin_metal_panto",
+      "shape": "panto",
+      "rim_thickness": "thin",
+      "preferred_materials": [
+        "metal",
+        "titanium"
+      ],
+      "color_families": [
+        "silver",
+        "gold",
+        "gunmetal",
+        "black"
+      ],
+      "universal_score": 0.86,
+      "style_note": "Light visual weight and broad compatibility."
+    }
+  ],
+  "recommendation_pipeline": [
+    "Detect face landmarks with an existing computer-vision model.",
+    "Derive normalized face ratios and estimate face-shape confidence.",
+    "Apply a hard size-fit filter if reliable measurements are available.",
+    "Score remaining frames by face-shape compatibility.",
+    "Add smaller scores for color, rim thickness, material and user preferences.",
+    "If face-shape confidence is low, increase universal_score weight.",
+    "Return top 3-5 frames with reasons and confidence values."
+  ],
+  "scoring": {
+    "note": "Only apply style scoring after acceptable physical fit is established.",
+    "style_score_weights": {
+      "face_shape_match": 0.4,
+      "color_match": 0.2,
+      "rim_thickness_match": 0.15,
+      "material_preference_match": 0.15,
+      "universal_score": 0.1
+    }
+  },
+  "frame_record_schema": {
+    "id": "string",
+    "brand": "string",
+    "model": "string",
+    "shape": "enum(frame_shape_classes)",
+    "material": "acetate|metal|titanium|combination",
+    "rim_thickness": "thin|medium|thick",
+    "color_name": "string",
+    "color_family": "string",
+    "lens_width_mm": "number|null",
+    "bridge_width_mm": "number|null",
+    "temple_length_mm": "number|null",
+    "front_width_mm": "number|null",
+    "lens_height_mm": "number|null",
+    "image_png": "string",
+    "style_tags": [
+      "string"
+    ],
+    "universal_score": "0..1"
+  },
+  "user_profile_schema": {
+    "face_shape": "oval|round|square|heart|oblong|diamond|unknown",
+    "face_shape_confidence": "0..1",
+    "undertone": "warm|cool|neutral|unknown",
+    "color_contrast": "low|medium|high|unknown",
+    "preferred_materials": [
+      "acetate|metal|titanium|combination"
+    ],
+    "preferred_rim_thickness": [
+      "thin|medium|thick"
+    ],
+    "known_comfortable_frame": {
+      "lens_width_mm": "number|null",
+      "bridge_width_mm": "number|null",
+      "temple_length_mm": "number|null",
+      "front_width_mm": "number|null"
+    },
+    "style_preferences": [
+      "classic",
+      "minimal",
+      "bold",
+      "vintage",
+      "modern"
+    ]
+  }
+}

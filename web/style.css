@@ -1,0 +1,91 @@
+/* OptiFit — global base + hover utilities.
+   Screen layouts are rendered inline by app.js (faithful to the OptiFit design).
+   This file only carries what inline styles cannot: resets, fonts, keyframes,
+   scrollbars, and :hover states. */
+
+html, body { margin: 0; padding: 0; background: #05080c; }
+* { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+#app {
+  min-width: 320px;
+  background: #05080c;
+  color: #e9f0f7;
+  font-family: "Assistant", system-ui, -apple-system, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: #35dff2; text-decoration: none; }
+a:hover { color: #7ceaf8; }
+::selection { background: #35dff2; color: #04222a; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #080d13; }
+::-webkit-scrollbar-thumb { background: #1c2a39; border-radius: 8px; }
+
+@keyframes ofPulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes ofSpin  { to { transform: rotate(360deg); } }
+@keyframes ofRise  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes ofScan  { 0% { transform: translateY(-100%); } 100% { transform: translateY(1200%); } }
+
+/* ---- hover utilities (inline styles can't express :hover) ---- */
+.hv-white,
+.hv-cyan, .hv-cyanb, .hv-cyanbc,
+.hv-bright, .hv-b26, .hv-b2b,
+.of-card { transition: color .15s ease, border-color .15s ease, filter .15s ease; }
+
+.hv-white:hover   { color: #ffffff !important; }
+.hv-cyan:hover    { color: #35dff2 !important; }
+.hv-cyanb:hover   { border-color: #35dff2 !important; }
+.hv-cyanbc:hover  { border-color: #35dff2 !important; color: #35dff2 !important; }
+.hv-bright:hover  { filter: brightness(1.08); }
+.hv-b26:hover     { border-color: #26404f !important; }
+.hv-b2b:hover     { border-color: #2b4655 !important; }
+
+/* responsive: let the fixed 1440-ish layouts breathe on small screens */
+@media (max-width: 980px) {
+  #app [data-responsive="grid2"]  { grid-template-columns: 1fr !important; }
+  #app [data-responsive="grid3"]  { grid-template-columns: 1fr 1fr !important; }
+  #app [data-responsive="grid4"]  { grid-template-columns: 1fr 1fr !important; }
+  /* single-column: don't pin the photo/recs, let everything scroll naturally */
+  #app .of-tryon-sticky { position: static !important; }
+  #app [data-responsive="grid2"] > aside { position: static !important; }
+}
+
+/* ---- accessibility ---- */
+/* Skip link: hidden until focused, then pinned top-center for keyboard users */
+.of-skip {
+  position: absolute;
+  left: 50%;
+  top: -60px;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 10px 18px;
+  background: #35dff2;
+  color: #03181e;
+  font-weight: 700;
+  border-radius: 0 0 10px 10px;
+  transition: top .15s ease;
+}
+.of-skip:focus { top: 0; color: #03181e; outline: none; }
+#ofMain:focus { outline: none; }
+/* Clear, high-contrast focus ring for keyboard users (mouse clicks stay clean) */
+#app [data-act]:focus-visible,
+#app a:focus-visible,
+#app input:focus-visible {
+  outline: 3px solid #35dff2;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+#app [data-act] { -webkit-tap-highlight-color: transparent; }
+
+/* Respect users who prefer less motion — freeze the decorative animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
